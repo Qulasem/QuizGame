@@ -41,15 +41,16 @@ body, html {
     /* Mobil cihazlarda yatay mod için */
     #unity-container {
         flex-direction: row;
-        width: 100%; /* Genişliği ekran genişliğine sığdır */
-        height: auto; /* Yüksekliği otomatik ayarla */
+        width: auto; /* Genişliği otomatik ayarla */
+        height: 100vh; /* Viewport yüksekliğini kullan */
+        aspect-ratio: 16 / 9; /* 1366x768 oranını koru */
         max-width: 1366px; /* Maksimum genişlik */
         max-height: 768px; /* Maksimum yükseklik */
         margin: auto; /* Otomatik marj ile tam ortala */
     }
-    #unity-canvas {
-        object-fit: cover; /* Ekranı kaplayacak şekilde ayarla */
-    }
+/*     #unity-canvas {
+        object-fit: cover; 
+    } */
 }
 
 #unity-progress-bar-empty {
@@ -82,3 +83,4 @@ body, html {
     font-family: Arial;
     font-size: 18px;
 }
+
