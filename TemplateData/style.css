@@ -1,4 +1,3 @@
-/* Temel stil tanımlamaları */
 body, html {
     margin: 0;
     padding: 0;
@@ -8,39 +7,44 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #000; /* Arka plan rengi, isteğe bağlı */
 }
 
 #unity-container {
+    position: relative; /* Flex child'ların konumunu ayarlamak için */
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    width: 100%; /* Yatay modda genişliği ekran genişliğine sığdır */
-    height: 100vh; /* Yatay modda yüksekliği viewport yüksekliğine sığdır */
-    max-height: 100vh; /* Maksimum yükseklik sınırı */
+    width: 80%; /* Masaüstü için varsayılan genişlik */
+    height: auto;
+    max-width: 1366px; /* Maksimum genişlik */
+    max-height: 768px; /* Maksimum yükseklik */
+    aspect-ratio: 16 / 9; /* Oranı korumak için */
 }
 
 #unity-canvas {
-    width: auto; /* Oranı korumak için genişliği otomatik ayarla */
-    height: 100%; /* Yatay modda yüksekliği ekran yüksekliğine sığdır */
-    max-height: 100vh;
+    width: 100%; /* Konteyneri dolduracak şekilde ayarla */
+    height: 100%; /* Oranı korumak için */
     object-fit: contain; /* İçeriği orantılı bir şekilde sığdır */
 }
 
-@media screen and (orientation: landscape) {
-  #unity-container {
-    height: auto;
-    max-height: 100vh;
-  }
-
-  #unity-canvas {
-    max-width: 100%; /* Canvas'ı ekran genişliğine sığdır */
-    max-height: 100vh; /* Canvas'ı ekran yüksekliğine sığdır */
-    object-fit: contain; /* İçeriği kesmeden en iyi şekilde sığdır */
-  }
+@media screen and (max-width: 768px) {
+    /* Küçük ekranlar ve tüm oryantasyonlar için */
+    #unity-container {
+        width: 100%; /* Mobil cihazlarda ekran genişliğini kullan */
+        height: auto;
+        min-height: 100%; /* Ekran yüksekliğini tam olarak kullan */
+        aspect-ratio: auto; /* Mobil cihazlarda oranı ayarla */
+    }
 }
 
+@media screen and (orientation: landscape) and (max-width: 768px) {
+    /* Mobil cihazlarda yatay mod için */
+    #unity-container {
+        flex-direction: row;
+        height: 100vh; /* Viewport yüksekliğini kullan */
+        aspect-ratio: auto;
+    }
+}
 #unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-dark.png') no-repeat center }
 #unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-dark.png') no-repeat center }
 #unity-footer { position: relative }
