@@ -42,7 +42,7 @@ body, html {
     #unity-container {
         flex-direction: row;
         width: auto; /* Genişliği otomatik ayarla */
-        height: 100vh; /* Viewport yüksekliğini kullan */
+        height: 50vh; /* Viewport yüksekliğini kullan */
         aspect-ratio: 16 / 9; /* 1366x768 oranını koru */
         max-width: 1366px; /* Maksimum genişlik */
         max-height: 768px; /* Maksimum yükseklik */
