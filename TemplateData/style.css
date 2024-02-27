@@ -22,8 +22,8 @@ body, html {
 }
 
 #unity-canvas {
-    width: 100%; /* Konteyneri dolduracak şekilde ayarla */
-    height: 100%; /* Oranı korumak için */
+    width: 90%; /* Konteyneri dolduracak şekilde ayarla */
+    height: 90%; /* Oranı korumak için */
     object-fit: contain; /* İçeriği orantılı bir şekilde sığdır */
 }
 
@@ -41,7 +41,7 @@ body, html {
     /* Mobil cihazlarda yatay mod için */
     #unity-container {
         flex-direction: row;
-        height: 100vh; /* Viewport yüksekliğini kullan */
+        height: 90vh; /* Viewport yüksekliğini kullan */
         aspect-ratio: auto;
     }
 }
