@@ -1,45 +1,44 @@
 body {
   padding: 0;
   margin: 0;
-  overflow: hidden; /* Yatayda kaydırmayı önlemek için eklendi */
+  overflow: hidden; /* Yatay kaydırmayı önlemek */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Tam ekran yüksekliği */
 }
 
 #unity-container {
-  position: absolute;
-  /* Mobil cihazlarda ekranın kenarlarına çerçeve eklemek için güncellenmiş stiller */
-}
-
-#unity-container.unity-desktop {
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#unity-container.unity-mobile {
-  width: 100%;
-  height: 100%;
-  display: flex; /* İçeriği esnek bir kutu içinde hizalama */
-  justify-content: center; /* Yatayda ortala */
-  align-items: center; /* Dikeyde ortala */
+  position: relative; /* İçerik için pozisyon referansı */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% - 40px); /* Kenar çerçeveleri için boşluk bırak */
+  height: calc(100% - 40px); /* Kenar çerçeveleri için boşluk bırak */
+  max-width: 1366px; /* Maksimum genişlik */
+  max-height: 768px; /* Maksimum yükseklik */
+  margin: 20px; /* Çerçeve olarak dış boşluk */
+  box-sizing: border-box;
+  padding: 20px; /* İç çerçeve */
+  background-color: #000; /* Çerçeve rengi, gerekiyorsa ayarlayın */
 }
 
 #unity-canvas {
-  background: #231F20;
-  /* Canvas boyutunu ve oranını koruyarak ekranı kaplayacak şekilde güncellendi */
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  width: 100%; /* Konteyner genişliğini doldur */
+  height: auto; /* Oranı korumak için otomatik yükseklik */
+  object-fit: contain; /* İçeriği orantılı olarak sığdır */
+}
+
+@media (max-width: 768px) {
+  #unity-container {
+    width: 100%; /* Mobil cihazlarda tam genişlik */
+    height: auto; /* Oranı korumak için */
+    margin: 0; /* Mobilde dış boşluk yok */
+    padding: 0; /* Mobilde iç çerçeve yok */
+  }
 }
 
 
-
-#unity-loading-bar, #unity-warning {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  /* Öğeleri yatay ve dikey olarak ortalar */
-}
 #unity-logo { width: 154px; height: 130px; background: url('unity-logo-dark.png') no-repeat center }
 #unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-dark.png') no-repeat center }
 #unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-dark.png') no-repeat center }
