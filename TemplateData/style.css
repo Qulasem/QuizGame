@@ -48,9 +48,9 @@ body, html {
         max-height: 768px; /* Maksimum yükseklik */
         margin: auto; /* Otomatik marj ile tam ortala */
     }
-/*     #unity-canvas {
-        object-fit: cover; 
-    } */
+     #unity-canvas {
+        object-fit: contain; 
+    } 
 }
 
 #unity-progress-bar-empty {
