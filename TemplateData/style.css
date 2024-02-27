@@ -1,41 +1,35 @@
-body, html {
-  height: 100%;
+body {
+  padding: 0;
   margin: 0;
-  overflow: hidden; /* Ekstra kaydırmayı önlemek için */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #000; /* Arka plan rengi, isteğe bağlı */
+  overflow: hidden; /* Yatayda kaydırmayı önlemek için eklendi */
 }
 
 #unity-container {
-  position: relative; /* Konteyneri pozisyonlamak için */
+  position: absolute;
+  /* Mobil cihazlarda ekranın kenarlarına çerçeve eklemek için güncellenmiş stiller */
+}
+
+#unity-container.unity-desktop {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#unity-container.unity-mobile {
   width: 100%;
-  max-width: 1366px; /* Maksimum genişlik */
-  aspect-ratio: 1366 / 768; /* İstenen oranı korur */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 100%;
+  display: flex; /* İçeriği esnek bir kutu içinde hizalama */
+  justify-content: center; /* Yatayda ortala */
+  align-items: center; /* Dikeyde ortala */
+  padding: 20px; /* Çerçeve olarak kullanılacak boşluk */
 }
 
 #unity-canvas {
-  width: 100%; /* Konteyner genişliğini doldur */
-  height: auto; /* Oranı korumak için otomatik yükseklik */
-}
-
-@media (max-width: 768px) {
-  /* Mobil cihazlar için özel stil ayarları */
-  #unity-container {
-    max-width: 100%;
-    height: auto;
-    margin: 20px; /* Ekran kenarlarında bir miktar boşluk */
-    padding: 0; /* Gerekirse padding ayarlaması */
-  }
-  
-  #unity-canvas {
-    max-height: 100vh; /* Ekranın tamamını kaplar, ancak oranı korur */
-    object-fit: contain; /* İçeriği kesmeden veya sıkıştırmadan uygun şekilde ölçeklendirir */
-  }
+  background: #231F20;
+  /* Canvas boyutunu ve oranını koruyarak ekranı kaplayacak şekilde güncellendi */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 #unity-loading-bar, #unity-warning {
