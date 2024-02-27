@@ -76,17 +76,19 @@
       // config.matchWebGLToCanvasSize = false;
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-      // Mobil cihaz ayarları güncelleniyor
-      document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-      container.className = "unity-mobile";
+        // Mobile device style: fill the whole browser client area with the game canvas:
 
-      // Ekran kenarlarında çerçeve oluşturmak ve içeriği ortalamak için ek CSS sınıfları ekleniyor
-      document.getElementById('unity-container').classList.add('mobile-frame');
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
 
-      // Canvas boyutunu güncelleme (isterseniz)
-      // canvas.style.width = "100%";
-      // canvas.style.height = "auto";
-    } else {
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+      } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
         canvas.style.width = "1366px";
