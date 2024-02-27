@@ -1,35 +1,42 @@
+/* Temel stil tanımlamaları */
 body, html {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: hidden; /* Ekran dışı içeriği gizler */
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center; /* İçeriği yatay olarak ortala */
-    align-items: center; /* İçeriği dikey olarak ortala */
   }
   
   #unity-container {
-    position: relative;
-    width: 100%; /* Yatay genişliği ekranla sınırla */
-    max-width: 100vw; /* Maksimum genişliği ekran genişliği ile sınırla */
-    /* Oranı korumak için gereken yükseklik veya max-height ayarı */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
   }
   
   #unity-canvas {
-    width: 100%; /* Konteyner genişliğini doldur */
-    height: auto; /* Oranı koruyarak yüksekliği otomatik ayarla */
-    object-fit: contain; /* İçeriği kesmeden en iyi şekilde sığdır */
+    object-fit: contain; /* İçeriği orantılı bir şekilde sığdır */
   }
   
-  @media screen and (orientation: portrait) {
-    #unity-container, #unity-canvas {
-      max-width: 100vw; /* Yatay görünüm genişliğine sığdır */
-      height: auto; /* Oranı koruyarak yüksekliği otomatik ayarla */
-      /* Ekranın üst ortasına konumlandırmak için ekstra stil ayarları */
+  /* Mobil cihazlarda yatay mod için medya sorgusu */
+  @media screen and (orientation: landscape) {
+    body, html {
+      height: 100vh; /* Viewport yüksekliğini tam olarak kullan */
+      width: 100vw; /* Viewport genişliğini tam olarak kullan */
+    }
+  
+    #unity-container {
+      width: auto; /* Konteyner genişliğini içeriğe göre ayarla */
+      height: 100%; /* Konteyner yüksekliğini ekranla sınırla */
+      flex-direction: row; /* İçeriği yatay olarak hizala */
+    }
+  
+    #unity-canvas {
+      max-width: 100%; /* Canvas'ı ekran genişliğine sığdır */
+      max-height: 100%; /* Canvas'ı ekran yüksekliğine sığdır */
     }
   }
-  
 #unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-dark.png') no-repeat center }
 #unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-dark.png') no-repeat center }
 #unity-footer { position: relative }
