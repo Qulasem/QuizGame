@@ -75,20 +75,43 @@
       // the canvas DOM size and WebGL render target sizes yourself.
       // config.matchWebGLToCanvasSize = false;
 
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
+      function adjustCanvasForMobile() {
+      var gameAspectRatio = 1366 / 768;
+      var windowAspectRatio = window.innerWidth / window.innerHeight;
+      var canvasWidth, canvasHeight;
 
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
-        container.className = "unity-mobile";
-
-        // To lower canvas resolution on mobile devices to gain some
-        // performance, uncomment the following line:
-        // config.devicePixelRatio = 1;
-
+      if (windowAspectRatio > gameAspectRatio) {
+        // Yatay mod: Ekranın yüksekliğine göre ayarla ve oranı koru
+        canvasHeight = window.innerHeight;
+        canvasWidth = canvasHeight * gameAspectRatio;
       } else {
+        // Dikey mod: Ekranın genişliğine göre ayarla ve oranı koru
+        canvasWidth = window.innerWidth;
+        canvasHeight = canvasWidth / gameAspectRatio;
+      }
+
+      canvas.style.width = canvasWidth + 'px';
+      canvas.style.height = canvasHeight + 'px';
+
+      // Canvas'ı sayfanın ortasına yerleştir
+      container.style.position = "absolute";
+      container.style.left = (window.innerWidth - canvasWidth) / 2 + 'px';
+      container.style.top = (window.innerHeight - canvasHeight) / 2 + 'px';
+    }
+
+    // Mobil cihazlar için ayarları yap
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      var meta = document.createElement('meta');
+      meta.name = 'viewport';
+      meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+      document.getElementsByTagName('head')[0].appendChild(meta);
+      container.className = "unity-mobile";
+
+      // Ekran boyutu değiştiğinde ve sayfa yüklendiğinde canvas'ı ayarla
+      window.addEventListener('resize', adjustCanvasForMobile);
+      window.addEventListener('load', adjustCanvasForMobile);
+      adjustCanvasForMobile(); // İlk yüklenme için de çağır
+    } else {
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
         canvas.style.width = "1366px";
